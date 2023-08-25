@@ -1,0 +1,109 @@
+@import 'responsive';
+
+@mixin typography-serif($size, $contexto) {
+  $tamanhoFonte: calc($size / 16 );
+  $tamanhoLinha: calc($tamanhoFonte * 1.2);
+
+  @if $contexto == title {
+    color: $color-base;
+    font-weight: 400;
+  }
+
+  @if $contexto == texto {
+    color: $color-serif-text;
+  }
+
+  font-family: $font-primary;
+  font-size: $tamanhoFonte + em;
+  line-height: $tamanhoLinha;
+
+  @include screen-responsive(large) {
+    font-family: $font-primary;
+    font-size: calc($tamanhoFonte * 0.8) + em;
+    line-height: calc($tamanhoLinha *  0.8);
+  }
+}
+
+@mixin typography-mono($size, $contexto) {
+  $tamanhoFonte: calc($size / 16 );
+  $tamanhoLinha: calc($tamanhoFonte * 1.2);
+
+  @if $contexto == title {
+    text-transform: uppercase;
+    font-weight: 400;
+    $tamanhoLinha: calc($tamanhoFonte * 1.4);
+  }
+
+  color: $color-base;
+  font-family: $font-secondary;
+  font-size: $tamanhoFonte + em;
+  line-height: $tamanhoLinha;
+
+  @include screen-responsive(large) {
+    font-family: $font-secondary;
+    font-size: calc($tamanhoFonte * 0.9) + em;
+    line-height: calc($tamanhoLinha *  0.9);
+  }
+}
+
+@mixin grid-geral {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 200px;
+  margin: 30px auto;
+  justify-content: center;
+  // background-color: blue;
+
+  @include screen-responsive(small) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@mixin detalhe($size) {
+  width: $size + px;
+  height: calc($size * 0.08) + px;
+  background-color: $color-base;
+  transform: rotate(-70deg);
+  margin-top: calc($size * 0.8) + px; 
+  margin-left: calc($size * -0.24) + px;
+  box-shadow: calc($size *  0.144)+px calc($size * 0.4)+px 0 0 $color-base,
+              calc($size * 0.292)+px calc($size * 0.8)+px 0 0 $color-base,
+              calc($size * 0.436)+px calc($size * 1.2)+px 0 0 $color-base;
+}
+
+@mixin style-h1-container {
+  text-align: center;
+    align-self: flex-start;
+    @include typography-mono(24, title);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    text-align: start;
+    justify-content: flex-start;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 3px;
+      background-color: $color-base;
+      align-self: center;
+    }
+}
+
+@mixin inputs($size, $contexto) {
+  width: 100%;
+  height: ($size * 1.8) + px;
+  outline: 2px solid $color-bordas;
+  padding: 0px 5px;
+  border: none;
+  background-color: $color-bg;
+
+
+  @include typography-mono($size, $contexto);
+
+  &:hover, &:focus {
+    outline: 2px solid $color-sombras;
+  }
+}
